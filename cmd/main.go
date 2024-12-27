@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -13,11 +14,11 @@ func main() {
 	config.LoadConfigFile()
 	logger.SetupLogging()
 	defer logger.CloseLogging()
-
-	go socket.StartUnixSocketServer()
+	fmt.Println("Starting GRPC server")
+	go socket.StartGRPCServer()
 
 	go socket.HandleSignals()
-
+	fmt.Println("GRPC server started")
 	for {
 		log.Println("Running...")
 		time.Sleep(1 * time.Second)

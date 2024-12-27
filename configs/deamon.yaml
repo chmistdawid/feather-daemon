@@ -1,6 +1,6 @@
 logger:
   # logs: "/var/log/feather-deamon.log"
-  path: "/home/igor/repos/feather-deamon/feather-deamon.log"
+  path: "feather-deamon.log"
   max-lines: 150
 socket:
   path: "/var/run/feather.sock"

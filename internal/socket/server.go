@@ -56,13 +56,20 @@ func Cleanup() {
 }
 
 func StartGRPCServer() {
+	initSocketDetails()
 	lis, err := net.Listen("unix", socketDetails.Path)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatalf("Failed to start Unix socket listener: %v", err)
+	}
+	defer lis.Close()
+
+	if err := os.Chmod(socketDetails.Path, 0755); err != nil {
+		log.Fatalf("Failed to set permissions on socket file: %v", err)
 	}
 	s := grpc.NewServer()
 	proto.RegisterFeatherServer(s, &Server{})
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+	log.Printf("Unix socket server started at %s", socketDetails.Path)
 }
