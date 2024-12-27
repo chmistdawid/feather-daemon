@@ -1,0 +1,67 @@
+
+syntax = "proto3";
+
+option go_package = "github.com/chmistdawid/container-runtime/proto";
+
+service Feather {
+    rpc Run(RunRequest) returns (RunResponse);
+    rpc Start(StartRequest) returns (StartResponse);
+    rpc Stop(StopRequest) returns (StopResponse);
+    rpc Restart(RestartRequest) returns (RestartResponse);
+    rpc Status(StatusRequest) returns (StatusResponse);
+    rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
+
+message RunRequest {
+    string cpu = 1;
+    string ram = 2;
+    string env = 3;
+    string volume = 4;
+    string network_bridge = 5;
+    string image = 6;
+    string name = 7;
+}
+
+message RunResponse {
+    string message = 1;
+}
+
+message StartRequest {
+    string name = 1;
+}
+
+message StartResponse {
+    string message = 1;
+}
+
+message StopRequest {
+    string name = 1;
+}
+
+message StopResponse {
+    string message = 1;
+}
+
+message RestartRequest {
+    string name = 1;
+}
+
+message RestartResponse {
+    string message = 1;
+}
+
+message StatusRequest {
+    string name = 1;
+}
+
+message StatusResponse {
+    string message = 1;
+}
+
+message DeleteRequest {
+    string name = 1;
+}
+
+message DeleteResponse {
+    string message = 1;
+}
